@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.login = exports.register = void 0;
+exports.logout = exports.login = exports.register = void 0;
 var user_model_1 = __importDefault(require("../models/user.model"));
 var user_helpers_1 = require("../Helpers/user-helpers");
 function register(req, res, next) {
@@ -80,11 +80,12 @@ function register(req, res, next) {
 exports.register = register;
 function login(req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, email, password, user, isVerified, error_2;
+        var sess, _a, email, password, user, isVerified, error_2;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
                     _b.trys.push([0, 3, , 4]);
+                    sess = req.session;
                     _a = req.body, email = _a.email, password = _a.password;
                     return [4 /*yield*/, user_model_1.default.findOne({ email: email })];
                 case 1:
@@ -96,6 +97,7 @@ function login(req, res, next) {
                     isVerified = _b.sent();
                     if (!isVerified)
                         res.status(403).json({ message: "enter a valid password" });
+                    sess.email = req.body.email;
                     res.status(200).json({ status: "Success", data: user });
                     return [3 /*break*/, 4];
                 case 3:
@@ -109,3 +111,22 @@ function login(req, res, next) {
     });
 }
 exports.login = login;
+function logout(req, res, next) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            try {
+                req.session.destroy(function (err) {
+                    if (err)
+                        throw Error(err);
+                    res.status(200).json({ message: "You have logged out successfully" });
+                });
+            }
+            catch (error) {
+                console.log(error.message);
+                next(error);
+            }
+            return [2 /*return*/];
+        });
+    });
+}
+exports.logout = logout;

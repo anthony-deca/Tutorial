@@ -1,0 +1,28 @@
+version: '3'
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo:/data/db
+  node:
+    container_name: compose_node_mongo
+    restart: always
+    build: .
+    ports:
+      - 8000:3000
+    volumes:
+      - .:/usr/src/app
+    environment:
+      MONGO_URI: mongodb://mongo:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false
+      PORT: 3000
+      secret: somesecrets
+    links:
+      - mongo
+    depends_on:
+      - mongo
+
+volumes:
+  mongo: 
+  

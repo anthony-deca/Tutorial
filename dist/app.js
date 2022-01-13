@@ -12,6 +12,7 @@ var db_config_1 = __importDefault(require("./config/db-config"));
 var index_1 = __importDefault(require("./routes/index"));
 var tutorial_routes_1 = __importDefault(require("./routes/tutorial-routes"));
 var user_routes_1 = __importDefault(require("./routes/user-routes"));
+var session_helper_1 = __importDefault(require("./Helpers/session-helper"));
 var app = express_1.default();
 db_config_1.default();
 // view engine setup
@@ -23,6 +24,7 @@ app.use(cors_1.default({
     origin: 'https://localhost:3000',
     credentials: true
 }));
+app.use(session_helper_1.default);
 app.use('/', index_1.default);
 app.use('/tutorial', tutorial_routes_1.default);
 app.use('/user', user_routes_1.default);

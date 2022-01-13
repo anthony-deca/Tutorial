@@ -8,7 +8,7 @@ var MONGO_URI = process.env.MONGO_URI;
 var connectDB = function () {
     try {
         mongoose_1.default.connect(MONGO_URI);
-        console.log("db connected");
+        console.log("db is now connected");
     }
     catch (error) {
         throw Error;

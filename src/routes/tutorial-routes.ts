@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import requireLogin from '../middleware/authenticate'
 import { createTutorial, getAllTutorial, getATutorial, updateATutorial, removeATutorial, removeAllTutorials } from '../controllers/tutorial.controller';
 
 const router = Router();

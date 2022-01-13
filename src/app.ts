@@ -7,6 +7,7 @@ import dbConnect from "./config/db-config";
 import index from "./routes/index";
 import tutorial from "./routes/tutorial-routes";
 import user from "./routes/user-routes";
+import sessionObj from "./Helpers/session-helper";
 
 let app = express();
 
@@ -21,6 +22,8 @@ app.use(cors({
   origin: 'https://localhost:3000',
   credentials: true
 }))
+
+app.use(sessionObj);
 
 app.use('/', index);
 app.use('/tutorial', tutorial);
