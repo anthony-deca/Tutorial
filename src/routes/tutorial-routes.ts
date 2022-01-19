@@ -4,11 +4,11 @@ import { createTutorial, getAllTutorial, getATutorial, updateATutorial, removeAT
 
 const router = Router();
 
-router.post("/", createTutorial);
-router.get('/', getAllTutorial);
-router.get("/:id", getATutorial);
-router.put("/:id", updateATutorial);
-router.delete("/:id", removeATutorial);
-router.delete("/", removeAllTutorials);
+router.post("/", requireLogin, createTutorial);
+router.get('/', requireLogin, getAllTutorial);
+router.get("/:id", requireLogin, getATutorial);
+router.put("/:id", requireLogin, updateATutorial);
+router.delete("/:id",requireLogin, removeATutorial);
+router.delete("/", requireLogin, removeAllTutorials);
 
 export default router;
