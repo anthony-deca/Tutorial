@@ -83,9 +83,8 @@ function getAllTutorial(req, res, next) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
                     selector = {};
-                    if (req.query) {
+                    if (req.query.title) {
                         title = req.query.title;
-                        console.log({ title: title });
                         selector = { title: title };
                     }
                     return [4 /*yield*/, tutorial_model_1.default.find(selector)];

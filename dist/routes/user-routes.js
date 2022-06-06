@@ -5,4 +5,5 @@ var user_controller_1 = require("../controllers/user.controller");
 var router = express_1.Router();
 router.post("/register", user_controller_1.register);
 router.get("/login", user_controller_1.login);
+router.get("/logout", user_controller_1.logout);
 exports.default = router;

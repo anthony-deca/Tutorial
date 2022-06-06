@@ -24,9 +24,8 @@ async function createTutorial(req:Request, res:Response, next:NextFunction){
 async function getAllTutorial(req:Request, res:Response, next:NextFunction){
 try {
     let selector = {};
-    if(req.query){
+    if(req.query.title){
         const {title} = req.query;
-        console.log({title});
         selector = {title};
     } 
     const allTutorials = await Tutorial.find(selector);

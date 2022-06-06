@@ -1,0 +1,35 @@
+version: '3'
+services:
+  mongo:
+    container_name: mongo_db
+    image: mongo:latest
+    networks:
+      - gateway
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo:/data/db
+  node:
+    container_name: compose_node_mongo
+    restart: always
+    build: .
+    networks:
+      - gateway
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/app
+    environment:
+      MONGO_URI: mongodb://mongo:27017/test
+      PORT: 3000
+      secret: somesecrets
+    links:
+      - mongo
+    depends_on:
+      - mongo
+
+volumes:
+  mongo: {}
+networks:
+  gateway: {}
+  
